@@ -1,31 +1,36 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11.3-buster
+# Python stage
+FROM python:3.11.3-buster AS python-build
 
-# Set the working directory in the container to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-ADD . /app
-
-# Install any needed packages specified in requirements.txt
+# Install dependencies
+ADD requirements.txt .
 RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-# Get the latest MiKTeX image from the registry
-RUN docker pull miktex/miktex
+# Add the rest of the code
+ADD . /app
 
-# Create a Docker volume named miktex
-RUN docker volume create --name miktex
+# MikTex stage
+FROM miktex/miktex AS miktex-build
 
-# Provided that your main input file is located in the current working directory, you can run pdflatex as follows
-RUN docker run -ti \
-  -v miktex:/miktex/.miktex \
-  -v `pwd`:/miktex/work \
-  miktex/miktex \
-  pdflatex main.tex
+WORKDIR /miktex/work
+
+# Final stage
+FROM python:3.11.3-buster
+
+# Copy Python dependencies
+COPY --from=python-build /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
+
+# Copy Django app
+COPY --from=python-build /app/ /app/
+
+# Copy MikTex
+COPY --from=miktex-build /miktex /miktex
+
+WORKDIR /app
 
 # Expose the port that the Django development server will run on
 EXPOSE 8000
 
 # Start the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
