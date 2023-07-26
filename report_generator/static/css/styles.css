@@ -1,0 +1,66 @@
+/* section_buddy/report_generator/static/css/styles.css */
+
+body {
+    background-color: #FFC788; /* More orange background color for the body */
+    padding: 50px;
+}
+
+/* Set the position of the heading */
+h1.main-title {
+    position: absolute;
+    top: 50px; /* Adjust the vertical position (y-coordinate) */
+    left: 100px; /* Adjust the horizontal position (x-coordinate) */
+    font-size: 32px; /* Adjust the font size of the heading */
+    font-weight: bold; /* Add bold style to the heading */
+    color: #333; /* Optional: Adjust the color of the heading text */
+}
+
+
+.container {
+    background-color: #FFC788; /* Orange background color for the container */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Set the position of the height input field */
+#heightInput {
+    position: absolute;
+    top: 150px; /* Adjust the vertical position (y-coordinate) */
+    left: 100px; /* Adjust the horizontal position (x-coordinate) */
+    width: 180px; /* Reduce the width of the input field */
+}
+
+/* Set the position of the width input field */
+#widthInput {
+    position: absolute;
+    top: 150px; /* Adjust the vertical position (y-coordinate) */
+    left: 300px; /* Adjust the horizontal position (x-coordinate) */
+    width: 180px; /* Reduce the width of the input field */
+}
+
+/* Set the position of the Generate Report button */
+#generateBtn {
+    position: absolute;
+    top: 200px; /* Adjust the vertical position (y-coordinate) */
+    left: 100px; /* Adjust the horizontal position (x-coordinate) */
+    width: 200px; /* Adjust the width of the button */
+}
+
+/* Position the labels over the input fields */
+label[for="heightInput"],
+label[for="widthInput"] {
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Calculate and set the coordinates for the labels' center */
+label[for="heightInput"] {
+    top: 130px; /* Adjust the vertical position to center the label over the height input field */
+    left: 100px; /* Adjust the horizontal position to center the label over the height input field */
+}
+
+label[for="widthInput"] {
+    top: 130px; /* Adjust the vertical position to center the label over the width input field */
+    left: 300px; /* Adjust the horizontal position to center the label over the width input field */
+}

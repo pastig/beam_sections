@@ -1,0 +1,30 @@
+<!-- report_generator/templates/home.html -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Section Buddy</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- Custom JavaScript -->
+    <script src="{% static 'js/custom.js' %}"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title"> Beam Generator </h1>
+        <form method="post" action="{% url 'generate_report' %}">
+            {% csrf_token %}
+            <input type="text" id="heightInput" class="form-control input-field" placeholder="Height" name="height">
+            <input type="text" id="widthInput" class="form-control input-field" placeholder="Width" name="width">
+            <label for="heightInput">Height:</label>
+            <label for="widthInput">Width:</label>
+            <button type="submit" id="generateBtn" class="btn btn-primary generate-report-btn">Generate Report</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
